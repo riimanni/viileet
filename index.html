@@ -1,138 +1,151 @@
-<!doctype html>
-<html lang="fi">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VIILEET — Esikatselu</title>
-  <meta name="description" content="VIILEET — Urheilu. Energia. Viileys. Esikatselu." />
-  <!-- Tailwind CDN for quick prototype -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .rounded-2xl { border-radius: 1rem; }
-    .card { background: #0b0b0b; border: 1px solid #1f2937; }
-    .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.8s forwards; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    blockquote.instagram-media { max-width: 540px; width: 100%; }
-  </style>
-</head>
-<body class="min-h-screen bg-black text-white font-sans">
-  <div class="max-w-6xl mx-auto">
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Instagram, PlayCircle } from "lucide-react";
+import { useEffect } from "react";
 
-    <!-- Header -->
-    <header class="border-b border-gray-800 px-6 py-4 flex justify-between items-center">
-      <img src="https://github.com/riimanni/viileet/blob/main/viileet_banner.jpg?raw=true" alt="VIILEET Logo" class="h-12 md:h-16 object-contain" />
-      <nav class="space-x-6 text-lg">
-        <a href="#" class="hover:text-green-400">Etusivu</a>
-        <a href="#" class="hover:text-green-400">Uutiset</a>
-        <a href="#" class="hover:text-green-400">Videot</a>
-        <a href="#" class="hover:text-green-400">Tietoa</a>
-      </nav>
-    </header>
+export default function ViileetHomePreview() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
 
-    <!-- Hero -->
-    <section class="px-6 py-16 text-center">
-      <h2 class="text-4xl md:text-6xl font-extrabold mb-6 fade-up">Urheilu. Energia. <span class="text-green-500">VIILEYS.</span></h2>
-      <p class="text-gray-300 max-w-2xl mx-auto mb-10">
-        VIILEET on sosiaalinen yhteisö, joka tuo yhteen urheilun, energian ja yhteisöllisyyden.
-        Täällä jaamme uusimmat urheilu-uutiset, videot ja hetket somesta.
-      </p>
-      <a href="#" class="inline-block bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg">Liity yhteisöön</a>
-    </section>
+    script.onload = () => {
+      if (window.instgrm) {
+        setTimeout(() => {
+          window.instgrm.Embeds.process();
+        }, 500);
+      }
+    };
+  }, []);
 
-    <!-- Uutiset -->
-    <section class="px-6 py-12">
-      <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">Uusimmat uutiset</h3>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="card rounded-xl overflow-hidden">
-          <img src="https://images.cdn.yle.fi/image/upload/f_auto,fl_progressive/q_auto:eco/w_600/v1692812345/39-12345678.jpg" alt="Uutiskuva" class="h-40 w-full object-cover">
-          <div class="p-4">
-            <h4 class="text-xl font-semibold mb-2">PikkuHuuhkajilla vaiheikas Espanjan-reissu</h4>
-            <p class="text-gray-400 text-sm mb-4">PikkuHuuhkajat kohtasi Espanjan ja myrsky hidasti treeniviikkoa.</p>
-            <a href="https://yle.fi/t/18-155404/fi" target="_blank" rel="noopener" class="text-green-500 hover:underline">Lue lisää</a>
-          </div>
-        </article>
+  return (
+    <div className="min-h-screen bg-black text-white font-sans">
+      {/* Header */}
+      <header className="border-b border-gray-800 px-6 py-4 flex justify-between items-center">
+        <img 
+          src="https://github.com/riimanni/viileet/blob/main/viileet_banner.jpg?raw=true" 
+          alt="VIILEET Logo" 
+          className="h-12 md:h-16 object-contain" 
+        />
+        <nav className="space-x-6 text-lg">
+          <a href="#" className="hover:text-green-400">Etusivu</a>
+          <a href="#" className="hover:text-green-400">Uutiset</a>
+          <a href="#" className="hover:text-green-400">Videot</a>
+          <a href="#" className="hover:text-green-400">Tietoa</a>
+        </nav>
+      </header>
 
-        <article class="card rounded-xl overflow-hidden">
-          <img src="https://yleisurheilu.fi/wp-content/uploads/2024/07/korkeushyppy_suomi.jpg" alt="Uutiskuva" class="h-40 w-full object-cover">
-          <div class="p-4">
-            <h4 class="text-xl font-semibold mb-2">Suomalaiskorkeushypyn kirkastui kisoissa</h4>
-            <p class="text-gray-400 text-sm mb-4">Virossa järjestetyissä kansainvälisissä yleisurheilukisoissa suomalaiset loistivat.</p>
-            <a href="https://yleisurheilu.fi/ajankohtaista/" target="_blank" rel="noopener" class="text-green-500 hover:underline">Lue lisää</a>
-          </div>
-        </article>
+      {/* Hero Section */}
+      <section className="px-6 py-16 text-center">
+        <motion.h2 
+          className="text-4xl md:text-6xl font-extrabold mb-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}>
+          Urheilu. Energia. <span className="text-green-500">VIILEYS.</span>
+        </motion.h2>
+        <p className="text-gray-300 max-w-2xl mx-auto mb-10">
+          VIILEET on sosiaalinen yhteisö, joka tuo yhteen urheilun, energian ja yhteisöllisyyden.
+          Täällä jaamme uusimmat urheilu-uutiset, videot ja hetket somesta.
+        </p>
+        <Button className="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg">
+          Liity yhteisöön
+        </Button>
+      </section>
 
-        <article class="card rounded-xl overflow-hidden">
-          <img src="https://images.cdn.yle.fi/image/upload/f_auto,fl_progressive/q_auto:eco/w_600/v1692819876/39-98765432.jpg" alt="Uutiskuva" class="h-40 w-full object-cover">
-          <div class="p-4">
-            <h4 class="text-xl font-semibold mb-2">Crystal Palacen Wembley-hurmos jatkui</h4>
-            <p class="text-gray-400 text-sm mb-4">Valioliiga-kauden avaava ottelu päättyi yllätykseen – Liverpool hävisi.</p>
-            <a href="https://yle.fi/urheilu/tuoreimmat" target="_blank" rel="noopener" class="text-green-500 hover:underline">Lue lisää</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Videot -->
-    <section class="px-6 py-12 bg-gray-950">
-      <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-5.197-3.054A1 1 0 008 9.053v5.895a1 1 0 001.555.832l5.197-3.055a1 1 0 000-1.662z"/></svg> Videot</h3>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-black border border-gray-800 rounded-2xl overflow-hidden">
-          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/cd0A89iaEhI" title="cd0A89iaEhI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="p-4"><h4 class="text-lg font-semibold">cd0A89iaEhI</h4></div>
+      {/* Uutiset Section */}
+      <section className="px-6 py-12">
+        <h3 className="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">Uusimmat uutiset</h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[{
+            title: "PikkuHuuhkajilla vaiheikas Espanjan-reissu",
+            desc: "PikkuHuuhkajat kohtasi Espanjan ja myrsky hidasti treeniviikkoa.",
+            link: "https://yle.fi/t/18-155404/fi",
+            img: "https://images.cdn.yle.fi/image/upload/f_auto,fl_progressive/q_auto:eco/w_600/v1692812345/39-12345678.jpg",
+          }, {
+            title: "Suomalaiskorkeushypyn kirkastui kisoissa",
+            desc: "Virossa järjestetyissä kansainvälisissä yleisurheilukisoissa suomalaiset loistivat.",
+            link: "https://yleisurheilu.fi/ajankohtaista/",
+            img: "https://yleisurheilu.fi/wp-content/uploads/2024/07/korkeushyppy_suomi.jpg",
+          }, {
+            title: "Crystal Palacen Wembley-hurmos jatkui",
+            desc: "Valioliiga-kauden avaava ottelu päättyi yllätykseen – Liverpool hävisi.",
+            link: "https://yle.fi/urheilu/tuoreimmat",
+            img: "https://images.cdn.yle.fi/image/upload/f_auto,fl_progressive/q_auto:eco/w_600/v1692819876/39-98765432.jpg",
+          }].map((item, i) => (
+            <Card key={i} className="bg-gray-900 border-gray-800">
+              <CardContent className="p-4">
+                <img src={item.img} alt={item.title} className="h-40 w-full object-cover rounded-xl mb-4" />
+                <h4 className="text-xl font-semibold mb-2">{item.title}</h4>
+                <p className="text-gray-400 text-sm mb-4">{item.desc}</p>
+                <a href={item.link} target="_blank" className="text-green-500 hover:underline">Lue lisää</a>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+      </section>
 
-        <div class="bg-black border border-gray-800 rounded-2xl overflow-hidden">
-          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/PSUfQruQ4lA" title="PSUfQruQ4lA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="p-4"><h4 class="text-lg font-semibold">PSUfQruQ4lA</h4></div>
+      {/* Videot Section */}
+      <section className="px-6 py-12 bg-gray-950">
+        <h3 className="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 flex items-center gap-2">
+          <PlayCircle className="text-green-500" /> Videot
+        </h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { id: "cd0A89iaEhI" },
+            { id: "PSUfQruQ4lA" },
+            { id: "Et_tpVPgER0" },
+          ].map((video, i) => (
+            <div key={i} className="bg-black border border-gray-800 rounded-2xl overflow-hidden">
+              <iframe
+                className="w-full aspect-video"
+                src={`https://www.youtube.com/embed/${video.id}`}
+                title={`VIILEET video ${i+1}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <div class="bg-black border border-gray-800 rounded-2xl overflow-hidden">
-          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/Et_tpVPgER0" title="Et_tpVPgER0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="p-4"><h4 class="text-lg font-semibold">Et_tpVPgER0</h4></div>
+      {/* Instagram Embed Section */}
+      <section className="px-6 py-12">
+        <h3 className="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 flex items-center gap-2">
+          <Instagram className="text-green-500" /> Instagram @viileet
+        </h3>
+        <div className="flex flex-col items-center space-y-8">
+          <blockquote 
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/C8QPuW1I1lO/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote 
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/C7Z3qzRo5Zc/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote 
+            className="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/p/C6xqYcOodcW/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <Button
+            onClick={() => window.open("https://www.instagram.com/viileet/", "_blank")}
+            className="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg mt-4"
+          >
+            Näytä lisää Instagramissa
+          </Button>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Instagram -->
-    <section class="px-6 py-12">
-      <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 7h.01M12 12h0M17 17h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-        Instagram @viileet
-      </h3>
-
-      <div class="flex flex-col items-center space-y-8">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C8QPuW1I1lO/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C7Z3qzRo5Zc/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C6xqYcOodcW/" data-instgrm-version="14"></blockquote>
-
-        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener" class="inline-block bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg mt-4">Näytä lisää Instagramissa</a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center py-6 border-t border-gray-800 text-gray-400 text-sm">
-      © 2025 VIILEET – Yhteisö, jossa urheilu elää.
-    </footer>
-
-  </div>
-
-  <!-- Instagram embed script and a safety timeout to process blocks after load -->
-  <script>
-    (function() {
-      var s = document.createElement('script');
-      s.src = 'https://www.instagram.com/embed.js';
-      s.async = true;
-      s.defer = true;
-      s.onload = function() {
-        try {
-          setTimeout(function() { window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process(); }, 500);
-        } catch (e) {
-          console.warn('Instagram embed processing failed', e);
-        }
-      };
-      document.body.appendChild(s);
-    })();
-  </script>
-</body>
-</html>
+      {/* Footer */}
+      <footer className="text-center py-6 border-t border-gray-800 text-gray-400 text-sm">
+        © 2025 VIILEET – Yhteisö, jossa urheilu elää.
+      </footer>
+    </div>
+  );
+}
