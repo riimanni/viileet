@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIILEET</title>
+  <link rel="icon" type="image/jpeg" href="https://github.com/riimanni/viileet/blob/main/viileetfavicon.jpg?raw=true" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
+  <style>
+    .social-menu { display: none; }
+    .social-menu.show { display: flex !important; }
+    .social-menu { z-index: 9999; }
+    .youtube-font { font-family: 'Roboto', sans-serif; letter-spacing: 0.5px; }
+    .instagram-font { font-family: 'Billabong', cursive; font-size: 1.25rem; }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white font-sans">
+  <header class="border-b border-gray-800 px-6 py-4 flex justify-between items-center">
+    <img src="https://github.com/riimanni/viileet/blob/main/viileet_banner.jpg?raw=true" alt="VIILEET Logo" class="h-12 md:h-16 object-contain" />
+    <nav class="space-x-6 text-lg">
+      <a href="#" class="hover:text-green-400">Etusivu</a>
+      <a href="#uutiset" class="hover:text-green-400">Uutiset</a>
+      <a href="#videot" class="hover:text-green-400">Videot</a>
+    </nav>
+  </header>
+
+  <section class="px-6 py-16 text-center relative">
+    <h2 class="text-4xl md:text-6xl font-extrabold mb-6">Urheilu. Energia. <span class="text-green-500">VIILEYS.</span></h2>
+    <p class="text-gray-300 max-w-2xl mx-auto mb-10">VIILEET on sosiaalinen yhteisö, joka tuo yhteen urheilun, energian ja yhteisöllisyyden. Täällä jaamme uusimmat urheilu-uutiset, videot ja hetket somesta.</p>
+
+    <div class="relative inline-block" id="join-menu-parent">
+      <button id="join-menu-button" aria-haspopup="true" aria-expanded="false" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg">Liity yhteisöön</button>
+
+      <div id="social-menu" class="social-menu absolute left-1/2 transform -translate-x-1/2 mt-3 bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-4 flex items-center space-x-6">
+        <a href="https://www.youtube.com/@viileet" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 youtube-font text-lg">YouTube</a>
+        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 instagram-font">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="uutiset" class="px-6 py-12">
+    <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">Uusimmat uutiset</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
+        <img src="https://ampparit.com/images/logo_og.png" class="h-40 w-full object-cover rounded-xl mb-4" />
+        <h4 class="text-xl font-semibold mb-2">Tuoreimmat urheilu-uutiset Ampparit.comista</h4>
+        <p class="text-gray-400 text-sm mb-4">Katso kaikki uusimmat urheilu-uutiset reaaliaikaisesti yhdestä paikasta.</p>
+        <a href="https://www.ampparit.com/urheilu" target="_blank" class="text-green-500 hover:underline">Lue lisää Ampparit.comissa</a>
+      </div>
+      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
+        <img src="https://ampparit.com/images/amp_sport.jpg" class="h-40 w-full object-cover rounded-xl mb-4" />
+        <h4 class="text-xl font-semibold mb-2">Nyt pinnalla: urheilumaailman tärkeimmät uutiset</h4>
+        <p class="text-gray-400 text-sm mb-4">Seuraa päivän puhutuimpia tapahtumia urheilussa ja kilpailumaailmassa.</p>
+        <a href="https://www.ampparit.com/urheilu/tuoreimmat" target="_blank" class="text-green-500 hover:underline">Katso uutiset</a>
+      </div>
+      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
+        <img src="https://ampparit.com/images/amp_highlight.jpg" class="h-40 w-full object-cover rounded-xl mb-4" />
+        <h4 class="text-xl font-semibold mb-2">Ampparit.com kokoaa urheilun huippuhetket</h4>
+        <p class="text-gray-400 text-sm mb-4">Yhdestä osoitteesta löydät uutiset, tulokset ja kohokohdat eri lajeista.</p>
+        <a href="https://www.ampparit.com/urheilu" target="_blank" class="text-green-500 hover:underline">Tutustu lisää</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="videot" class="px-6 py-12 bg-gray-950">
+    <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 flex items-center gap-2">Videot</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <iframe class="w-full aspect-video rounded-2xl" src="https://www.youtube.com/embed/cd0A89iaEhI" allowfullscreen></iframe>
+      <iframe class="w-full aspect-video rounded-2xl" src="https://www.youtube.com/embed/PSUfQruQ4lA" allowfullscreen></iframe>
+      <iframe class="w-full aspect-video rounded-2xl" src="https://www.youtube.com/embed/Et_tpVPgER0" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="px-6 py-12 text-center">
+    <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4 inline-flex items-center gap-2">Instagram @viileet</h3>
+    <div class="flex flex-col items-center space-y-20">
+      <a href="https://www.instagram.com/viileet/" target="_blank">
+        <img src="https://github.com/riimanni/viileet/blob/main/IG-linkki.jpg?raw=true" alt="Seuraa meitä Instagramissa" class="rounded-2xl border border-gray-800 hover:opacity-90 transition w-full max-w-2xl transform scale-150" />
+      </a>
+      <button onclick="window.open('https://www.instagram.com/viileet/', '_blank')" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg mt-20">Seuraa meitä Instagramissa</button>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 border-t border-gray-800 text-gray-400 text-sm">© 2025 VIILEET – Yhteisö, jossa urheiluhenki elää.</footer>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('join-menu-button');
+      var menu = document.getElementById('social-menu');
+      var parent = document.getElementById('join-menu-parent');
+
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isShown = menu.classList.contains('show');
+        if (isShown) {
+          menu.classList.remove('show');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          menu.classList.add('show');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (!parent.contains(event.target)) {
+          menu.classList.remove('show');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          menu.classList.remove('show');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
