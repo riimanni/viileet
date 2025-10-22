@@ -6,15 +6,39 @@
   <title>VIILEET</title>
   <link rel="icon" type="image/jpeg" href="https://github.com/riimanni/viileet/blob/main/viileetfavicon.jpg?raw=true" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet">
-  <style>
-    .social-menu { display: none; }
-    .social-menu.show { display: flex !important; }
-    .social-menu { z-index: 9999; }
-    .youtube-font { font-family: 'Roboto', sans-serif; letter-spacing: 0.5px; }
-    .instagram-font { font-family: 'Billabong', cursive; font-size: 1.25rem; }
-  </style>
+  <script>
+    async function fetchRSS(url, containerId) {
+      try {
+        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+        const data = await response.json();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, "application/xml");
+        const items = xml.querySelectorAll("item");
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        items.forEach((item, index) => {
+          if (index < 3) {
+            const title = item.querySelector("title")?.textContent || "Uutinen";
+            const link = item.querySelector("link")?.textContent || "#";
+            const description = item.querySelector("description")?.textContent || "";
+            const div = document.createElement('div');
+            div.className = "bg-gray-900 border-gray-800 p-4 rounded-xl";
+            div.innerHTML = `
+              <h4 class='text-xl font-semibold mb-2'>${title}</h4>
+              <p class='text-gray-400 text-sm mb-4'>${description}</p>
+              <a href='${link}' target='_blank' class='text-green-500 hover:underline'>Lue lisää</a>
+            `;
+            container.appendChild(div);
+          }
+        });
+      } catch (err) {
+        console.error('RSS-haku epäonnistui', err);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchRSS('https://feeds.yle.fi/uutiset/v1/majorHeadlines/YLE_URHEILU.rss', 'news-container');
+    });
+  </script>
 </head>
 <body class="min-h-screen bg-black text-white font-sans">
   <header class="border-b border-gray-800 px-6 py-4 flex justify-between items-center">
@@ -33,34 +57,17 @@
     <div class="relative inline-block" id="join-menu-parent">
       <button id="join-menu-button" aria-haspopup="true" aria-expanded="false" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg">Liity yhteisöön</button>
 
-      <div id="social-menu" class="social-menu absolute left-1/2 transform -translate-x-1/2 mt-3 bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-4 flex items-center space-x-6">
-        <a href="https://www.youtube.com/@viileet" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 youtube-font text-lg">YouTube</a>
-        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 instagram-font">Instagram</a>
+      <div id="social-menu" class="social-menu absolute left-1/2 transform -translate-x-1/2 mt-3 bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-4 flex items-center space-x-6 hidden">
+        <a href="https://www.youtube.com/@viileet" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 font-bold">YouTube</a>
+        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 font-bold">Instagram</a>
       </div>
     </div>
   </section>
 
   <section id="uutiset" class="px-6 py-12">
-    <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">Uusimmat uutiset</h3>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
-        <img src="https://ampparit.com/images/logo_og.png" class="h-40 w-full object-cover rounded-xl mb-4" />
-        <h4 class="text-xl font-semibold mb-2">Tuoreimmat urheilu-uutiset Ampparit.comista</h4>
-        <p class="text-gray-400 text-sm mb-4">Katso kaikki uusimmat urheilu-uutiset reaaliaikaisesti yhdestä paikasta.</p>
-        <a href="https://www.ampparit.com/urheilu" target="_blank" class="text-green-500 hover:underline">Lue lisää Ampparit.comissa</a>
-      </div>
-      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
-        <img src="https://ampparit.com/images/amp_sport.jpg" class="h-40 w-full object-cover rounded-xl mb-4" />
-        <h4 class="text-xl font-semibold mb-2">Nyt pinnalla: urheilumaailman tärkeimmät uutiset</h4>
-        <p class="text-gray-400 text-sm mb-4">Seuraa päivän puhutuimpia tapahtumia urheilussa ja kilpailumaailmassa.</p>
-        <a href="https://www.ampparit.com/urheilu/tuoreimmat" target="_blank" class="text-green-500 hover:underline">Katso uutiset</a>
-      </div>
-      <div class="bg-gray-900 border-gray-800 p-4 rounded-xl">
-        <img src="https://ampparit.com/images/amp_highlight.jpg" class="h-40 w-full object-cover rounded-xl mb-4" />
-        <h4 class="text-xl font-semibold mb-2">Ampparit.com kokoaa urheilun huippuhetket</h4>
-        <p class="text-gray-400 text-sm mb-4">Yhdestä osoitteesta löydät uutiset, tulokset ja kohokohdat eri lajeista.</p>
-        <a href="https://www.ampparit.com/urheilu" target="_blank" class="text-green-500 hover:underline">Tutustu lisää</a>
-      </div>
+    <h3 class="text-3xl font-bold mb-6 border-l-4 border-green-500 pl-4">Uusimmat urheilu-uutiset</h3>
+    <div id="news-container" class="grid md:grid-cols-3 gap-6">
+      <p class='text-gray-400'>Ladataan uutisia...</p>
     </div>
   </section>
 
@@ -91,32 +98,13 @@
       var menu = document.getElementById('social-menu');
       var parent = document.getElementById('join-menu-parent');
 
-      if (!btn || !menu) return;
-
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        var isShown = menu.classList.contains('show');
-        if (isShown) {
-          menu.classList.remove('show');
-          btn.setAttribute('aria-expanded', 'false');
-        } else {
-          menu.classList.add('show');
-          btn.setAttribute('aria-expanded', 'true');
-        }
+        menu.classList.toggle('hidden');
       });
 
       document.addEventListener('click', function(event) {
-        if (!parent.contains(event.target)) {
-          menu.classList.remove('show');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          menu.classList.remove('show');
-          btn.setAttribute('aria-expanded', 'false');
-        }
+        if (!parent.contains(event.target)) menu.classList.add('hidden');
       });
     })();
   </script>
