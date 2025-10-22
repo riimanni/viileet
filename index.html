@@ -6,11 +6,15 @@
   <title>VIILEET</title>
   <link rel="icon" type="image/jpeg" href="https://github.com/riimanni/viileet/blob/main/viileet_banner.jpg?raw=true" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- YouTube and Instagram font imports -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet"> <!-- YouTube font -->
+  <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet"> <!-- Instagram font -->
   <style>
     .social-menu { display: none; }
     .social-menu.show { display: flex !important; }
     .social-menu { z-index: 9999; }
-    .social-menu img { filter: invert(1); width: 2.75rem; height: 2.75rem; object-fit: contain; }
+    .youtube-font { font-family: 'Roboto', sans-serif; letter-spacing: 0.5px; }
+    .instagram-font { font-family: 'Billabong', cursive; font-size: 1.5rem; }
   </style>
 </head>
 <body class="min-h-screen bg-black text-white font-sans">
@@ -30,13 +34,9 @@
     <div class="relative inline-block" id="join-menu-parent">
       <button id="join-menu-button" aria-haspopup="true" aria-expanded="false" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-6 py-3 rounded-2xl text-lg">Liity yhteisöön</button>
 
-      <div id="social-menu" class="social-menu absolute left-1/2 transform -translate-x-1/2 mt-3 bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-4 flex items-center space-x-4">
-        <a href="https://www.youtube.com/@viileet" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 inline-block" aria-label="YouTube">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-9 h-9 md:w-10 md:h-10"><path d="M23.498 6.186a2.997 2.997 0 00-2.111-2.115C19.492 3.5 12 3.5 12 3.5s-7.492 0-9.387.571A2.997 2.997 0 00.502 6.186 31.32 31.32 0 000 12a31.32 31.32 0 00.502 5.814 2.997 2.997 0 002.111 2.115C4.508 20.5 12 20.5 12 20.5s7.492 0 9.387-.571a2.997 2.997 0 002.111-2.115A31.32 31.32 0 0024 12a31.32 31.32 0 00-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 inline-block" aria-label="Instagram">
-          <img src="https://raw.githubusercontent.com/riimanni/viileet/33ace5d16251600b7447a369344ddb112958c94e/instagram-icon.svg" alt="Instagram Logo" />
-        </a>
+      <div id="social-menu" class="social-menu absolute left-1/2 transform -translate-x-1/2 mt-3 bg-gray-900 border border-gray-700 rounded-2xl shadow-lg p-4 flex items-center space-x-6">
+        <a href="https://www.youtube.com/@viileet" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 youtube-font text-lg">YouTube</a>
+        <a href="https://www.instagram.com/viileet/" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 instagram-font">Instagram</a>
       </div>
     </div>
   </section>
